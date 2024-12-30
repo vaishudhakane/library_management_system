@@ -1,0 +1,122 @@
+<!--<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Book Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+        form {
+            width: 50%;
+            margin: auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .btn-group {
+            text-align: center;
+        }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn-save {
+            background-color: #007BFF;
+        }
+        .btn-save:hover {
+            background-color: #0056b3;
+        }
+        .btn-cancel {
+            background-color: #6c757d;
+        }
+        .btn-cancel:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <form th:action="@{/books}" th:object="${book}" method="post">
+        <h1 th:text="${book.id != null ? 'Edit Book' : 'Add New Book'}"></h1>
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" th:field="*{title}" placeholder="Enter book title" required />
+
+        <label for="author">Author</label>
+        <input type="text" id="author" name="author" th:field="*{author}" placeholder="Enter author name" required />
+
+        <div class="btn-group">
+            <button type="submit" class="btn btn-save">Save</button>
+            <a th:href="@{/books}" class="btn btn-cancel">Cancel</a>
+        </div>
+    </form>
+</body>
+</html>-->
+
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Book</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f9f9f9; margin: 0; padding: 0;">
+<div style="max-width: 600px; margin: 20px auto; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); padding: 20px;">
+    <h1>Edit Book</h1>
+    <form th:action="@{/books/update/{id}(id=${book.id})}" th:object="${book}" method="post">
+        <label for="title" style="display: block; margin-bottom: 8px; font-weight: bold;">Title</label>
+        <input type="text" id="title" th:field="*{title}" required
+               style="width: 100%; padding: 10px; margin-bottom: 16px; border: 1px solid #ddd; border-radius: 4px;" />
+
+        <label for="author" style="display: block; margin-bottom: 8px; font-weight: bold;">Author</label>
+        <input type="text" id="author" th:field="*{author}" required
+               style="width: 100%; padding: 10px; margin-bottom: 16px; border: 1px solid #ddd; border-radius: 4px;" />
+
+        <label for="status" style="display: block; margin-bottom: 8px; font-weight: bold;">Status</label>
+        <select id="status" th:field="*{status}"
+                style="width: 100%; padding: 10px; margin-bottom: 16px; border: 1px solid #ddd; border-radius: 4px;">
+            <option value="Available" th:selected="${book.status == 'Available'}">Available</option>
+            <option value="Borrowed" th:selected="${book.status == 'Borrowed'}">Borrowed</option>
+        </select>
+
+        <!--<label for="publisher" style="display: block; margin-bottom: 8px; font-weight: bold;">Publisher</label>
+        <select id="publisher" th:field="*{publisher.id}"
+                style="width: 100%; padding: 10px; margin-bottom: 16px; border: 1px solid #ddd; border-radius: 4px;">
+            <option th:each="publisher : ${publishers}" 
+                    th:value="${publisher.id}" 
+                    th:text="${publisher.name}" 
+                    th:selected="${publisher.id == book.publisher.id}">
+            </option>
+        </select>-->
+
+        <button type="submit"
+                style="width: 100%; padding: 10px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">
+            Save Changes
+        </button>
+    </form>
+</div>
+</body>
+</html>
